@@ -1,22 +1,22 @@
-package com.example.androidarchitecture.MVC;
+package com.example.androidarchitecture.MVP;
 
+import com.example.androidarchitecture.MVC.MVCActivity;
 import com.example.androidarchitecture.Models.CountriesService;
 import com.example.androidarchitecture.Models.Country;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class CountriesController {
+public class CountriesPresenter {
 
-    private MVCActivity view;
+    private View view;
     private CountriesService service;
 
-    public CountriesController(MVCActivity view){
+    public CountriesPresenter(View view){
         this.view = view;
         service = new CountriesService();
         fetchCountries();
@@ -48,4 +48,8 @@ public class CountriesController {
         fetchCountries();
     }
 
+    public interface View{
+        void setValues(List<String> countries);
+        void onError();
+    }
 }
